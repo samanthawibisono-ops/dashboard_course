@@ -1,0 +1,28 @@
+# sesi1/app_kalkulator_tagihan.py — PRAKTIKUM Sesi 1: aplikasi sederhana
+import streamlit as st
+st.set_page_config(page_title="Kalkulator Tagihan", page_icon="🧾")
+st.title("🧾 Kalkulator Estimasi Tagihan Internet")
+st.write("Masukkan paket dan durasi berlangganan untuk melihat estimasi biaya.")
+
+HARGA = {"DSL": 260_000, "Fiber": 420_000, "Mobile Broadband": 310_000, "Satelit": 550_000}
+DISKON = {"Bulanan": 0.00, "Tahunan": 0.10, "Dua Tahun": 0.18}
+
+layanan = st.selectbox("Jenis layanan", list(HARGA))
+kontrak = st.radio("Jenis kontrak", list(DISKON), horizontal=True)
+bulan = st.number_input("Durasi (bulan)", min_value=1, max_value=72, value=12, step=1)
+ppn = st.checkbox("Tambahkan PPN 11%", value=True)
+layananbaru = st.slider("Layanan baru (diskon 0-20% tambahan)", min_value=0, max_value=20, value=0, step=5, format="%d%%")
+nama = st.text_input("Siapa nama Anda?")
+divisi = st.selectbox("Divisi","HR")
+tahunpengalaman = st.slider("Select your age", min_value=18, max_value=150, value=18, step=1)
+
+
+Profilpeserta = st.info (tahunpengalaman)
+
+if st.button("Hitung", type="primary"):
+ per_bulan = HARGA[layanan] * (1 - DISKON[kontrak])
+ total = per_bulan * bulan * (1.11 if ppn else 1)
+ st.metric("Biaya per bulan", f"Rp{per_bulan:,.0f}".replace(",", "."))
+ st.metric("Total estimasi", f"Rp{total:,.0f}".replace(",", "."),
+ delta=f"hemat {DISKON[kontrak]:.0%}" if DISKON[kontrak] else None)
+ st.caption("Estimasi bersifat ilustratif untuk latihan.")
