@@ -12,12 +12,7 @@ kontrak = st.radio("Jenis kontrak", list(DISKON), horizontal=True)
 bulan = st.number_input("Durasi (bulan)", min_value=1, max_value=72, value=12, step=1)
 ppn = st.checkbox("Tambahkan PPN 11%", value=True)
 layananbaru = st.slider("Layanan baru (diskon 0-20% tambahan)", min_value=0, max_value=20, value=0, step=5, format="%d%%")
-nama = st.text_input("Siapa nama Anda?")
-divisi = st.selectbox("Divisi","HR")
-tahunpengalaman = st.slider("Select your age", min_value=18, max_value=150, value=18, step=1)
 
-
-Profilpeserta = st.info (tahunpengalaman)
 
 if st.button("Hitung", type="primary"):
  per_bulan = HARGA[layanan] * (1 - DISKON[kontrak])
