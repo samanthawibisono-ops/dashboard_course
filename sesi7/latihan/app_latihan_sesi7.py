@@ -7,7 +7,7 @@ import plotly.express as px
 from dash import Dash, Input, Output, State, ctx, dash_table, dcc, html, no_update
 from dash.exceptions import PreventUpdate
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 df = pd.read_csv(ROOT / "data" / "customer_churn.csv", parse_dates=["signup_date"])
 df["status"] = df["churn"].map({0: "Bertahan", 1: "Churn"})
 
